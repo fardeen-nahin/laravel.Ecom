@@ -1,6 +1,14 @@
-@include('layouts.header')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <!-- Account Page -->
+    <title>Document</title>
+</head>
+<body>
     <div class="account-page">
         <div class="container">
             <div class="row">
@@ -16,7 +24,7 @@
                         </div>
                         <form id="LoginForm" action="/users" method="GET">
                             @csrf
-                            <input type="email" name="email" placeholder="Email">
+                            <input type="text" name="uname" placeholder="Email">
                             <input type="password" name="pass" placeholder="Password">
                             <button type="submit" class="btn">Login</button>
                             <a href="">Forget Password</a>
@@ -26,7 +34,7 @@
                             @csrf
                             <input type="text" name="uname" placeholder="Username" required>
                             <input type="email" name="email" placeholder="Email">
-                            <input type="text" name="mobile" placeholder="Mobile">
+                            <input type="text" name="mobile" placeholder="Mobile No.">
                             <input type="password" name="pass" placeholder="Password" required>
                             <button type="submit" class="btn">Register</button>
                         </form>
@@ -37,11 +45,9 @@
     </div>
 
 
-    <!-- Footer -->
-        @include('layouts.footer')
-    <!-- javascript -->
+    
 
-    <script>
+    {{-- <script>
         var MenuItems = document.getElementById("MenuItems");
         MenuItems.style.maxHeight = "0px";
         function menutoggle() {
@@ -71,7 +77,7 @@
             Indicator.style.transform = "translate(100px)";
 
         }
-    </script>
+    </script> --}}
 
 </body>
 
