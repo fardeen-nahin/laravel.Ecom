@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('products');
+        $products = Product::paginate(3);
+        return view('products', compact('products'));
     }
 
     /**
@@ -40,9 +41,25 @@ class ProductController extends Controller
         $product-> price = $request->has('price')? $request->get('price'):'';
         $product-> amount = $request->has('amount')? $request->get('amount'):'';
         $product->is_active = 1;
-        
-        $product->save();
-        return back()->with('success', 'Product Successfully Saved!');
+
+        if($request->hasFile('images')){
+            $files = $request->file('images');
+            $imageLocation = array();
+            $i = 0;
+            foreach($files as $file){
+                $extention = $file->getClientOriginalExtension();
+                $fileName = 'product_' . time() . ++$i . '.' . $extention;
+                $location = '/images/uploads/';
+                $file->move(public_path() . $location, $fileName);
+                $imageLocation[] = $location . $fileName;
+            }
+            $product->image = implode('|', $imageLocation);
+            $product->save();
+            return back()->with('success', 'Product Successfully Saved!');
+        } else {
+    
+            return back()->with('Error', 'Product was not saved Successfully !');
+        }
     }
 
     /**
@@ -88,5 +105,20 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+    public function addProduct (){
+        $products = Product::all();
+        $returnProducts = array();
+
+        foreach($products as $product){
+            $images = explode('|', $product->image);
+            $returnProducts[] = [
+                'name' => $product->name,
+                'price' => $product->price,
+                'amount' => $product->amount,
+                'image' => $images[0]
+            ];
+        }
+        return view('add_product', compact('returnProducts'));
     }
 }
