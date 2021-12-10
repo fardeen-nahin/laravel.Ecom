@@ -68,82 +68,39 @@
 <div class="small-container">
     <h2 class="title">Featured Products</h2>
     <div class="row">
-        <div class="col-4">
-            <a href="{{ url('/product_details') }}"><img src="{{ asset('images/product-1.jpg') }}"></a>
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
+     @foreach ($featured_products as $product)
+     <div class="col-4">
+        <a href="{{ url('/products/' .$product->id) }}"><img src="{{ asset(explode('|', $product->image)[0]) }}" height="300" width="200" ></a>
+        <h4>{{$product->name}}</h4>
+        <div class="rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-o"></i>
         </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-2.jpg') }}">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-3jpg') }}">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-4.jpg') }}">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
+        <p>{{$product->price}}</p>
     </div>
+     @endforeach
+    </div>
+
     <h2 class="title">Latest Products</h2>
     <div class="row">
+        @foreach ($latest_products as $product)
         <div class="col-4">
-            <img src="{{ asset('images/product-5.jpg') }}">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
-        <div class="col-4">
-            <img src="{{ asset('images/product-6.jpg') }}">
-            <h4>Red Printed T-Shirt</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-        </div>
-    </div>
+           <a href="{{ url('/products/' .$product->id) }}"><img src="{{ asset(explode('|', $product->image)[0]) }}" height="300" width="200" ></a>
+           <h4>{{$product->name}}</h4>
+           <div class="rating">
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i>
+               <i class="fa fa-star-o"></i>
+           </div>
+           <p>{{$product->price}}</p>
+       </div>
+        @endforeach
+       </div>
 </div>
 
 <!-- Offer -->

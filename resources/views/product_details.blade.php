@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="{{ url('/css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -41,7 +42,7 @@
                     @if (isset($images[0]))
                     <div class="small-img-col">
                         <img src="{{ asset($images[0])}}" width="100%" class="small-img">
-                    </div>  
+                    </div>
                     @endif
                     @if (isset($images[1]))
                     <div class="small-img-col">
@@ -62,19 +63,28 @@
 
             </div>
             <div class="col-2">
-                <p>{{$product->catagory->catagory_name}}</p>
+                <p>{{$product->catagory}}</p>
+                {{-- <p>{{$product->catagory->catagory_name}}</p> --}}
                 <h1>{{$product->name}}</h1>
-                <h4>{{$product->price}}</h4>
-                <select>
-                    <option>Select Size</option>
-                    <option>XXL</option>
-                    <option>XL</option>
-                    <option>L</option>
-                    <option>M</option>
-                    <option>S</option>
+                <h4>Price: {{$product->price}}</h4>
+                <form action="/add-to-cart" method="POST">
+                    @csrf
+                <select name="size">
+                    <option value="">Select Size</option>
+                    <option value="XXL">XXL</option>
+                    <option value="XL">XL</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="S">S</option>
                 </select>
-                <input type="number" value="1">
-                <a href="" class="btn">Add To Cart</a>
+                <input type="hidden" name="pid" value="{{$product->id}}">
+
+                <input type="hidden" name="price" value="{{$product->price}}">
+                <input type="hidden" name="name" value="{{$product->name}}">
+                <label for="">Amount</label>
+                    <input name="quantity" type="number" value="1">
+                 <button type="submit" class="btn">Add to Cart </button>
+                </form>
 
                 <h3>Product Details <i class="fa fa-indent"></i></h3>
                 <br>
@@ -152,6 +162,10 @@
     </div>
 
     <!-- javascript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
     <script>
         var MenuItems = document.getElementById("MenuItems");
